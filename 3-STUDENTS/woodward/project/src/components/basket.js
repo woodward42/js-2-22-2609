@@ -12,26 +12,27 @@
 //     });
 // }, 300);
 
-export default {
-    items: [],
-    shown: false,
-    container: null,
-    itemsContainer: null,
-    url: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json',
-    init () {
-        this.container = document.querySelector('#basket');
+export default class Basket{
+    constructor (url = '/basket.json',  container = '#basket'){
+        this.items = [];
+        this.shown = false;
+        this.container = document.querySelector(container);
         this.itemsContainer = document.querySelector('#basket-items');
-        this.getData(this.url)
+        this.url = 'https://raw.githubusercontent.com/kellolo/static/master/JSON' + url;
+        this._init();
+    }
+    _init () {
+        this._getData(this.url)
             .then(basket => {this.items = basket.content})
             .finally(() => {
                 this._render();
                 this._handleActions();
             })
-    },
-    getData(url) {
+    }
+    _getData(url) {
         return fetch(url) //JSON
             .then(data => data.json()) // JSON >>> Obj/Array
-    },
+    }
     _render() {
         let str = '';
         this.items.forEach(item => {
@@ -45,11 +46,10 @@ export default {
                             </span>$${item.productPrice}</div>
                         </div>
                         <button class="drop__cancel fas fa-times-circle" data-id="${item.productId}" name="remove">
-                        <button>
                     </div>`;
         });
         this.itemsContainer.innerHTML = str;
-    },
+    }
     _handleActions() {
         document.querySelector('#basket-toggler').addEventListener('click', () => {
             this.shown = !this.shown;
@@ -62,7 +62,7 @@ export default {
                 this._remove(ev.target.dataset.id);
             }
         })
-    },
+    }
     add(product) {
         let find = this.items.find(el => el.productId == product.productId);
             if (!find) {
@@ -71,7 +71,7 @@ export default {
                 find.amount++;
             }
         this._render();
-    },
+    }
     _remove(id) {
         let find = this.items.find(el => el.productId == id);
         if (find.amount > 1) {
