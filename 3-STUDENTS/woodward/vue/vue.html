@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <style>
+        strong{
+            display: block;
+            border: 5px solid black;
+            min-height: 5vh;
+            padding: 10px;
+            margin: 5px 0;;
+        }
+        body{
+            padding: 20px;
+            background-color:lightseagreen;
+        }
+        input{
+            padding: 5px;
+            outline: none;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <strong>{{message}}</strong>
+        <input v-model="message" placeholder="Печатай сюда...">
+        <button @click="_valert" name="1st_button">Кликни и я скажу тебе...</button>
+        <strong v-for="item of items">
+            <h1>{{item.productName}}</h1>
+            <img :src="item.productImg" alt="">
+            <span>Price: ${{item.productPrice}}</span>
+        </strong>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                message:'',
+                catURL:'https://raw.githubusercontent.com/kellolo/static/master/JSON/catalog.json',
+                items: []
+            },
+            methods:{
+                _getData(url){
+                    return fetch(url).then(data => data.json())
+                },
+                _valert(evt){
+                    alert(evt.target.getAttribute('name'))
+                },
+            },
+
+            mounted(){
+                this._getData(this.catURL).then(items => {this.items = items; console.log(items)})
+            }
+        })
+    </script>
+</body>
+</html>
