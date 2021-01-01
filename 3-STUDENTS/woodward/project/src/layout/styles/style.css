@@ -5,9 +5,7 @@
   box-sizing: border-box; }
 
 body {
-  font-family: 'Lato', sans-serif; 
-   
-}
+  font-family: 'Lato', sans-serif; }
 
 a {
   text-decoration: none; }
@@ -581,7 +579,7 @@ a {
 /* SUBSCRIBE */
 .subscribe {
   margin-bottom: 110px;
-  background: url('https://raw.githubusercontent.com/kellolo/static/master/img/JS1_shop/subscribe_main.png') center no-repeat;
+  background: url('../../assets/imgs/subscribe/subscribe_main.png') center no-repeat;
   background-size: cover; }
   .subscribe__inner {
     display: flex; }
