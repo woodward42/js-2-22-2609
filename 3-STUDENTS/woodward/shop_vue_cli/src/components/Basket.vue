@@ -43,11 +43,11 @@ export default {
         get(url){
            return fetch(url).then(data => data.json())
         },
-        add(product) {
-                let find = this.items.find(el => el.productId == product.productId);
+        add(item) {
+                let find = this.items.find(el => el.productId == item.productId);
                 // console.log(find)
                     if (!find) {
-                        let newItem = Object.assign({}, product, { amount: 1 });
+                        let newItem = Object.assign({}, item, { amount: 1 });
                         this.items.push(newItem);
                     } else {
                         find.amount++;

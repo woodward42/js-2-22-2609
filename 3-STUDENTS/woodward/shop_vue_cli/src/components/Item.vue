@@ -5,7 +5,7 @@
             <button 
                 class="catalog__bucket" 
                 name="add"
-                
+                @click="$emit('addSome',item)"
             >
                 <img class="catalog__hidden_img" 
                 src="https://raw.githubusercontent.com/Eliseev88/geekbrains/3fdc76c4d5e84b1398b168e6239b8651dce01f6f/products/Forma_1_copy.svg" alt="#">

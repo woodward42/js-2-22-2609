@@ -1,7 +1,7 @@
 <template>
     <div class="catalog__main" id="catalog">
         <!-- отрисовываем каталог компонентами Item, передавая в компонент продукт/item через props -->
-        <Item v-for="item of items" :key="item.productId" :item="item"/>
+        <Item v-for="item of items" :key="item.productId" :item="item" @addSome="func"/>
 
     </div>
 </template>
@@ -29,6 +29,10 @@ export default {
         get(url){
            return fetch(url).then(data => data.json())
         },
+        func(payload){
+            console.log(payload)
+            this.$emit('add', payload)
+        }
     }
    
 }

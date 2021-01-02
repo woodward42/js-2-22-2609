@@ -43,7 +43,7 @@
                 <div class="header__count" id="basket-count"></div>
 
                     <!-- DROP CART -->
-                <Basket />
+                <Basket ref="basket"/>
                 </div>
                 <a class="header__link" href="#">My Account</a>
             </div>
@@ -190,7 +190,7 @@
         <section class="catalog center">
             <h3 class="catalog__header">Featured Items</h3>
             <p class="catalog__header_text">Shop for items based on what we featured in this week</p>
-            <Catalog @add="_add(this)"/>
+            <Catalog @add="_add"/>
             
             <!-- ./CATALOG__MAIN -->
             <div class="catalog__button">
@@ -331,7 +331,7 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 import Catalog from '../components/Catalog.vue'
 import Basket from '../components/Basket.vue'
-import Item from '../components/Item.vue'
+import Item from '../components/Item'
 
 export default {
   name: 'Home',
@@ -342,9 +342,8 @@ export default {
     Item
   },
   methods: {
-      _add(pl) {
-          console.log(pl)
-          this.$refs.basket.add(pl);
+      _add(it) {
+          this.$refs.basket.add(it);
       }
   },
 }
