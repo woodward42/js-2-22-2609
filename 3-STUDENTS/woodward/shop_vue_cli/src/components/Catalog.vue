@@ -7,11 +7,13 @@
 </template>
 
 <script>
-import Item from './Item.vue'
+import Item from './Item'
+import Basket from './Basket'
 
 export default {
     components:{
-        Item
+        Item,
+        Basket
     },
     data(){
         return {
@@ -20,14 +22,15 @@ export default {
         }
     },
     mounted(){
-        this.get(this.url).then(items => this.items = items)
+        this.get(this.url).then(items => this.items = items);
+        
     },
     methods:{
-        get(url) {
-            return fetch(url)
-                .then(data => data.json())
-        }
+        get(url){
+           return fetch(url).then(data => data.json())
+        },
     }
+   
 }
 </script>
 

@@ -40,43 +40,10 @@
             </div>
             <div class="header__right">
                 <div class="header__bucket">
-                    <div class="header__count" id="basket-count"></div>
-                    <button id="basket-toggler" @click="showBasket = !showBasket">
-                        <img class="header__cart" src="../../src/assets/imgs/cart.png" alt="cart">
-                    </button>
+                <div class="header__count" id="basket-count"></div>
+
                     <!-- DROP CART -->
-                    <div class="drop" id="basket" v-show="showBasket">
-                        <div id="basket-items">
-
-                            <div class="drop__box" v-for="item of basketItems" :key="item.productId">
-                                <a class="drop__img" href="single.html">
-                                    <img :src="item.productImg" alt="#" width="72" height="85"></a>
-                                <div class="drop__info">
-                                    <a href="single.html" class="drop__title">{{item.productName}}</a>
-                                    <img src="../../src/assets/imgs/drop_cart/stars.png" alt="#">
-                                    <div class="drop__price">
-                                        <span class="drop__count">
-                                            {{ item.amount }}
-                                        </span>
-                                        <span class="drop__span">x</span>
-                                        $ {{ item.productPrice }}
-                                    </div>
-                                </div>
-                                <button 
-                                    @click="remove(item.productId)" 
-                                    class="drop__cancel fas fa-times-circle" 
-                                    name="remove"
-                                ></button>
-                            </div>
-
-                        </div>
-                        <div class="drop__total">
-                            <div>TOTAL</div>
-                            <div id="total-sum"></div>
-                        </div>
-                        <a href="checkout.html" class="drop__link">Checkout</a>
-                        <a href="#" class="drop__link">Go to cart</a>
-                    </div>
+                <Basket />
                 </div>
                 <a class="header__link" href="#">My Account</a>
             </div>
@@ -223,7 +190,7 @@
         <section class="catalog center">
             <h3 class="catalog__header">Featured Items</h3>
             <p class="catalog__header_text">Shop for items based on what we featured in this week</p>
-            <Catalog />
+            <Catalog @add="_add(this)"/>
             
             <!-- ./CATALOG__MAIN -->
             <div class="catalog__button">
@@ -363,12 +330,22 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import Catalog from '../components/Catalog.vue'
+import Basket from '../components/Basket.vue'
+import Item from '../components/Item.vue'
 
 export default {
   name: 'Home',
   components: {
     HelloWorld,
-    Catalog
-  }
+    Catalog,
+    Basket,
+    Item
+  },
+  methods: {
+      _add(pl) {
+          console.log(pl)
+          this.$refs.basket.add(pl);
+      }
+  },
 }
 </script>
