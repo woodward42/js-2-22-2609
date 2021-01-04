@@ -8,23 +8,12 @@
         <Nav />
         <Promo />
         <Products />
-        <!-- CATALOG -->
-                <section class="catalog center">
-                    <h3 class="catalog__header">Featured Items</h3>
-                    <p class="catalog__header_text">Shop for items based on what we featured in this week</p>
-                    <Catalog @add="_add"/>
-                    
-                    <!-- ./CATALOG__MAIN -->
-                    <div class="catalog__button">
-                        <a class="catalog__link" href="product.html">Browse All Product<i class="fas fa-long-arrow-alt-right"></i></a>
-                    </div>
-                </section>
+        <Catalog @add="_add"/>
         <Offer />
         <Subcribe />
         <Contacts />
         <Footer />
-    
-    </div> <!-- ./PAGE -->
+    </div>
 <!-- POP-UP
 <div class="popup" id="popup">
     <button class="popup__close" id="close"><i class="fa fa-close"></i></button>
