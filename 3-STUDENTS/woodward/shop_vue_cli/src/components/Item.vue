@@ -11,8 +11,10 @@
             <button 
                 class="catalog__bucket" 
                 name="add"
-                @click="$emit('addSome',item)"
+                @click="$emit('addSome',item)"  
             >
+            <!-- альтернатива (проброс через голову сразу в Index, где это будет = @add для компонента Catalog): @click="$parent.$emit('add', item)" -->
+
                 <img class="catalog__hidden_img" 
                 src="https://raw.githubusercontent.com/Eliseev88/geekbrains/3fdc76c4d5e84b1398b168e6239b8651dce01f6f/products/Forma_1_copy.svg" alt="#">
                 <span class="catalog__hidden_text">Add to Cart</span>
@@ -28,29 +30,28 @@
         </template>
 
         <template v-if="type == 'basket'">
-        <div>
 
-                <a class="drop__img" href="single.html">
-                    <img :src="item.productImg" alt="#" width="72" height="85"></a>
-                <div class="drop__info">
-                    <a href="single.html" class="drop__title">{{item.productName}}</a>
-                    <img src="../../src/assets/imgs/drop_cart/stars.png" alt="#">
-                    <div class="drop__price">
-                        <span class="drop__count">
-                            {{ item.amount }}
-                        </span>
-                        <span class="drop__span">x</span>
-                        $ {{ item.productPrice }}
+        <div class="drop__box">
+            <a class="drop__img" href="single.html">
+                <img :src="item.productImg" alt="#" width="72" height="85"></a>
+                    <div class="drop__info">
+                        <a href="single.html" class="drop__title">{{item.productName}}</a>
+                        <img src="../../src/assets/imgs/drop_cart/stars.png" alt="#">
+                        <div class="drop__price">
+                            <span class="drop__count">
+                                {{ item.amount }}
+                            </span>
+                            <span class="drop__span">x</span>
+                            $ {{ item.productPrice }}
+                        </div>
+                        <button 
+                            @click="$parent.remove(item.productId)" 
+                            class="drop__cancel fas fa-times-circle" 
+                            name="remove"
+                        ></button>
                     </div>
-                </div>
-                <button 
-                    @click="remove(item.productId)" 
-                    class="drop__cancel fas fa-times-circle" 
-                    name="remove"
-                >x</button>
-
-
         </div>
+
         </template>
     </div>
 </template>

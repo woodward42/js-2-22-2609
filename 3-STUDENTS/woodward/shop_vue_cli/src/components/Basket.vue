@@ -3,20 +3,17 @@
     <button id="basket-toggler" @click="showBasket = !showBasket">
         <img class="header__cart" src="../../src/assets/imgs/cart.png" alt="cart">
     </button>
-     <div id="basket-items">
-        <div class="drop__box">
-            <div class="drop" id="basket" v-show="showBasket">
+    <div class="drop" id="basket" v-show="showBasket">
+            <div id="basket-items">
                 <Item v-for="item of items" :key="item.productId" :item="item" type="basket"/>
-                <div class="drop__total">
+            </div>    
+            <div class="drop__total">
                 <div>TOTAL</div>
                 <div id="total-sum"></div>
-                </div>
-            <a href="checkout.html" class="drop__link">Checkout</a>
-            <a href="#" class="drop__link">Go to cart</a> 
             </div>
-            
-        </div>
-     </div>
+            <a href="checkout.html" class="drop__link">Checkout</a>
+            <a href="#" class="drop__link">Go to cart</a>
+    </div>
 </div>
 </template>
 
