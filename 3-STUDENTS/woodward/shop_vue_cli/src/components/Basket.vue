@@ -35,7 +35,9 @@ export default {
         return {
             items: [],
             showBasket: false,
-            basketUrl: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json'
+            //basketUrl: 'https://raw.githubusercontent.com/kellolo/static/master/JSON/basket.json'
+            //basketUrl: '/api/basket' //for Dev
+            basketUrl: '/basket' //for Build
         }
     },
     mounted(){
