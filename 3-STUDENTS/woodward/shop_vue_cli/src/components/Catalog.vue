@@ -15,6 +15,7 @@
 <script>
 import Item from './Item'
 import Basket from './Basket'
+import $axXios from '../utils/axios/index.js'
 
 export default {
     components:{
@@ -30,13 +31,10 @@ export default {
         }
     },
     mounted(){
-        this.get(this.url).then(items => this.items = items);
+        $axXios.get(this.url).then(items => this.items = items);
         
     },
     methods:{
-        get(url){
-           return fetch(url).then(data => data.json())
-        },
         func(payload){
             console.log(payload)
             this.$emit('add', payload)

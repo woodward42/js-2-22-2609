@@ -25,7 +25,7 @@
 
 <script>
 import Item from './Item'
-
+import $axXios from '../utils/axios/index.js'
 
 export default {
     components:{
@@ -41,30 +41,53 @@ export default {
         }
     },
     mounted(){
-      this.get(this.basketUrl).then(basket => this.items = basket.content)
+      $axXios.get(this.basketUrl).then(items => this.items = items.content)
 
     },
     methods:{
-        get(url){
-           return fetch(url).then(data => data.json())
-        },
         add(item) {
                 let find = this.items.find(el => el.productId == item.productId);
                 // console.log(find)
                     if (!find) {
                         let newItem = Object.assign({}, item, { amount: 1 });
-                        this.items.push(newItem);
+                        $axXios.post(`${this.basketUrl}`, newItem)
+                                .then(status => {
+                                    if (status){
+                                        this.items.push(newItem);
+                                    }
+                                })
+                                .catch(e => {console.log(e)});
                     } else {
-                        find.amount++;
+                         $axXios.put(`${this.basketUrl}/${find.productId}`, 1)
+                                .then(status => {
+                                    if (status){
+                                            find.amount++;
+                                    }
+                                })
+                                .catch(e => {console.log(e)});
                     }
         },        
         remove(id) {
             let find = this.items.find(el => el.productId == id);
-            console.log(id, this.items)
+                //console.log(id, this.items)
             if (find.amount > 1) {
-                find.amount--;
+                $axXios.put(`${this.basketUrl}/${find.productId}`, -1)
+                       .then(status => {
+                           if (status){
+                                find.amount--;
+                           }
+                       })
+                       .catch(e => {console.log(e)});
+                
             } else {
-                this.items.splice(this.items.indexOf(find), 1);
+                $axXios.delete(`${this.basketUrl}/${find.productId}`)
+                       .then(status => {
+                           if (status){
+                               this.items.splice(this.items.indexOf(find), 1);
+                           }
+                       })
+                       .catch(e => {console.log(e)});
+                
             }
         }
     }
